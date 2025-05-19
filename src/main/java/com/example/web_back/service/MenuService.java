@@ -43,5 +43,12 @@ public class MenuService {
 
         return repository.save(menu); // 여기서 Menu 타입이므로 오류 없음
     }
+
+    public void deleteMenu(Long id) {
+        if(!repository.existsById(id)){
+            throw new IllegalArgumentException("해당하는 ID 없음!");
+        }
+        repository.deleteById(id);
+    }
 }
 

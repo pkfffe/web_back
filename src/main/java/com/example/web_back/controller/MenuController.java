@@ -23,4 +23,14 @@ public class MenuController {
     public Menu addMenu(@RequestBody MenuRequest request) {
         return service.save(request);
     }
+    @PostMapping("/delete")
+    public String deleteMenu(@RequestBody MenuRequest request) {
+        try{
+            service.deleteMenu(request.getId());
+            return "메뉴 ID" +request.getId() + "삭제 완료";
+        } catch (IllegalArgumentException e){
+            return e.getMessage();
+        }
+
+    }
 }
