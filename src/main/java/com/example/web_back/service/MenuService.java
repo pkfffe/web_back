@@ -36,6 +36,8 @@ public class MenuService {
     public Menu save(MenuRequest request) {
         // DTO → Entity 수동 변환
         Menu menu = new Menu();
+        menu.setId(request.getId());
+        menu.setName(request.getName());
         menu.setMood(request.getMood());
         menu.setTime(request.getTime());
         menu.setLocation(request.getLocation());
