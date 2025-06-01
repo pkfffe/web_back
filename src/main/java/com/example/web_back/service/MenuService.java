@@ -18,15 +18,14 @@ public class MenuService {
     }
 
     public MenuResponse recommend(MenuRequest request) {
-        List<Menu> result = repository.findByMoodOrTimeOrLocationOrWeather(
-                request.getMood(),
-                request.getTime(),
-                request.getLocation(),
-                request.getWeather()
+        List<Menu> result = repository.findByOptionalFilters(
+                request.getCuisine(),
+                request.getProtein(),
+                request.getDishBase()
         );
 
         if (result.isEmpty()) {
-            return new MenuResponse("추천할 메뉴가 없습니다. 김치찌개!");
+            return new MenuResponse("추천할 메뉴가 없습니다.");
         }
 
         Collections.shuffle(result);
@@ -34,23 +33,21 @@ public class MenuService {
     }
 
     public Menu save(MenuRequest request) {
-        // DTO → Entity 수동 변환
         Menu menu = new Menu();
         menu.setId(request.getId());
         menu.setName(request.getName());
-        menu.setMood(request.getMood());
-        menu.setTime(request.getTime());
-        menu.setLocation(request.getLocation());
-        menu.setWeather(request.getWeather());
-
-        return repository.save(menu); // 여기서 Menu 타입이므로 오류 없음
+        menu.setCuisine(request.getCuisine());
+        menu.setProtein(request.getProtein());
+        menu.setDishBase(request.getDishBase());
+        return repository.save(menu);
     }
 
     public void deleteMenu(Long id) {
-        if(!repository.existsById(id)){
+        if (!repository.existsById(id)) {
             throw new IllegalArgumentException("해당하는 ID 없음!");
         }
         repository.deleteById(id);
     }
 }
+
 

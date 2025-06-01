@@ -8,17 +8,15 @@ import lombok.NoArgsConstructor;
 public class MenuRequest {
     private Long id;
     private String name;
-    private String mood;
-    private String time;
-    private String location;
-    private String weather;
+    private String cuisine;
+    private String protein;
+    private String dishBase;
 
     public MenuRequest(MenuRequest menu) {
         this.id = menu.id;
         this.name = menu.name;
-        this.mood = menu.mood;
-        this.time = menu.time;
-        this.location = menu.location;
-        this.weather = menu.weather;
+        this.cuisine = menu.cuisine;
+        this.protein= menu.protein;
+        this.dishBase = menu.dishBase;
     }
 }
